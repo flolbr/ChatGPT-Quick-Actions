@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "My Extension",
+  "version": "1.0",
+  "description": "A simple Firefox extension.",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://chat.openai.com/",
+    "https://chat.openai.com/",
+    "https://www.youtube.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://chat.openai.com/*", "https://chat.openai.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/border-48.png"
+    },
+    "default_title": "My Extension"
+  }
+}
