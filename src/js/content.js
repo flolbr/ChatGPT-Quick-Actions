@@ -1,14 +1,12 @@
 console.log('content.js loaded');
 
-const VIDEO_SUMMERIZER_URL = 'https://chat.openai.com/share/ea0b7446-42eb-4a4e-88e2-de75f5a1eefc';
+import { VIDEO_SUMMARIZER_URL } from "./consts";
 
 const autoContinueURLs = [
-    `${VIDEO_SUMMERIZER_URL}`,
+    `${VIDEO_SUMMARIZER_URL}`,
 ];
 
-const promptInjectURLs = [
-    `${VIDEO_SUMMERIZER_URL}/continue`,
-];
+
 
 let videoParam = '';
 
@@ -33,7 +31,9 @@ if (autoContinueURLs.includes(window.location.origin + window.location.pathname)
     continueButton.setAttribute('to', newURL.toString());
     continueButton.setAttribute('href', newURL.toString());
 
+    console.log('Clicking continue button');
     continueButton.click();
+    continueButton.disabled = true;
 }
 
 
@@ -52,36 +52,45 @@ const promptTextareaObserver = new MutationObserver((mutations) => {
             console.log(promptTextarea);
             promptTextareaObserver.disconnect();
 
-            // wait for 1 second and then inject the video URL
+            const form = document.getElementsByTagName('form')[0];
+
+            // wait for 500ms and then inject the video URL
             setTimeout(() => {
 
 
-                // wait 100ms and then inject the video URL again
+                let button = form.querySelector('button.enabled\\:bg-brand-purple');
+
+                // wait 500ms and then inject the video URL again
                 const injectInterval = setInterval(() => {
-                    if (promptTextarea.value === '') {
+                    if (promptTextarea.value.trim() !== videoParam) {
 
                         promptTextarea.value = videoParam;
 
-                        let button = document.querySelector('button.enabled\\:bg-brand-purple');
-
-                        promptTextarea.click();
-
-                        const anInterval = setInterval(() => {
-                            if (button.getAttribute('disabled') === null) {
-
-                                clearInterval(anInterval);
-                                button.click();
-                            }
-                        }, 100);
 
                     } else {
-                        console.log('promptTextarea.value is not empty, not injecting video URL');
-                        console.log(promptTextarea.value);
                         // stop the interval
                         clearInterval(injectInterval);
+                        console.log('Stopping injectInterval')
+
+                        promptTextarea.focus();
+
+                        const sendInterval = setInterval(() => {
+                            if (button.getAttribute('disabled') === null) {
+
+                                clearInterval(sendInterval);
+                                console.log('Stopping sendInterval');
+
+                                console.log('button is enabled, clicking');
+                                button.click();
+                            } else {
+                                promptTextarea.focus()
+                                promptTextarea.click();
+                            }
+                        }, 500);
+
                     }
-                }, 1000);
-            }, 2000);
+                }, 500);
+            }, 500);
         }
     });
 });

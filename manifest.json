@@ -1,25 +1,52 @@
 {
-  "manifest_version": 2,
-  "name": "My Extension",
+  "manifest_version": 3,
+  "name": "ChatGPT Quick Actions",
   "version": "1.0",
   "description": "A simple Firefox extension.",
   "icons": {
-    "48": "icons/border-48.png"
+    "48": "icons/border-48.png",
+    "24": "icons/border-24.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{b1fa0f27-2934-425e-8a42-0953617e7053}",
+      "strict_min_version": "60.0"
+    }
   },
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "src/js/background.js"
   },
-  "permissions": [
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "{{chrome}}.permissions": [
     "contextMenus",
     "tabs",
+    "storage"
+  ],
+  "{{chrome}}.host_permissions": [
+    "http://chat.openai.com/",
+    "https://chat.openai.com/",
+    "https://www.youtube.com/"
+  ],
+  "{{firefox}}.permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
     "http://chat.openai.com/",
     "https://chat.openai.com/",
     "https://www.youtube.com/"
   ],
   "content_scripts": [
     {
-      "matches": ["http://chat.openai.com/*", "https://chat.openai.com/*"],
-      "js": ["content.js"]
+      "matches": [
+        "http://chat.openai.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "src/js/content.js"
+      ]
     }
   ],
   "browser_action": {
