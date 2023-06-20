@@ -16,25 +16,14 @@
   },
   "background": {
     "{{chrome}}.service_worker": "src/background.ts",
-    "{{firefox}}.scripts": [
-      "src/background.ts"
-    ]
+    "{{firefox}}.scripts": ["src/background.ts"]
   },
   "options_ui": {
     "page": "src/options.html",
     "open_in_tab": true
   },
-  "{{chrome}}.permissions": [
-    "contextMenus",
-    "tabs",
-    "storage",
-    "activeTab"
-  ],
-  "{{chrome}}.host_permissions": [
-    "http://chat.openai.com/",
-    "https://chat.openai.com/",
-    "https://www.youtube.com/"
-  ],
+  "{{chrome}}.permissions": ["contextMenus", "tabs", "storage", "activeTab"],
+  "{{chrome}}.host_permissions": ["http://chat.openai.com/", "https://chat.openai.com/", "https://www.youtube.com/"],
   "{{firefox}}.permissions": [
     "contextMenus",
     "tabs",
@@ -46,13 +35,8 @@
   ],
   "content_scripts": [
     {
-      "matches": [
-        "http://chat.openai.com/*",
-        "https://chat.openai.com/*"
-      ],
-      "js": [
-        "src/js/content.js"
-      ]
+      "matches": ["http://chat.openai.com/*", "https://chat.openai.com/*"],
+      "js": ["src/js/content.js"]
     }
   ],
   "{{firefox}}.browser_action": {

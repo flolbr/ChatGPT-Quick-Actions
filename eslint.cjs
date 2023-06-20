@@ -13,5 +13,11 @@ module.exports = {
   },
   rules: {
     // Add your custom rules here
-  }
+    'max-len': ['warn', { code: 120 }],
+  },
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.js', '**/*.vue'],
+    }
+  ]
 };

@@ -1,27 +1,29 @@
 <script lang="ts" setup>
-import {VIDEO_SUMMARIZER_GUID} from "../js/consts";
-import {getCurrentTabUrl} from "../utils";
-import {ref} from "vue";
+import { VIDEO_SUMMARIZER_GUID } from '../js/consts';
+import { getCurrentTabUrl } from '../utils';
+import { ref } from 'vue';
 
-console.log("Hello from the popup!");
+console.log('Hello from the popup!');
 
-let tabUrl = ref("");
+const tabUrl = ref('');
 
-getCurrentTabUrl().then((url) => {
-  console.log(url);  // Do something with the URL here
-  tabUrl.value = url;
-}).catch((error) => {
-  console.error(error);  // Handle errors here
-});
+getCurrentTabUrl()
+  .then((url) => {
+    console.log(url); // Do something with the URL here
+    tabUrl.value = url;
+  })
+  .catch((error) => {
+    console.error(error); // Handle errors here
+  });
 
 const shortcuts = [
   {
-    "name": "Video Summarizer",
-    "guid": VIDEO_SUMMARIZER_GUID,
-    "url": "",
+    name: 'Video Summarizer',
+    guid: VIDEO_SUMMARIZER_GUID,
+    url: '',
     getURL() {
-      return  `https://chat.openai.com/share/${this.guid}?video=${encodeURIComponent(tabUrl.value)}`;
-    }
+      return `https://chat.openai.com/share/${this.guid}?video=${encodeURIComponent(tabUrl.value)}`;
+    },
   },
 ];
 </script>
@@ -32,11 +34,10 @@ const shortcuts = [
     <!-- Create links for all shortcuts -->
     <ul v-for="shortcut in shortcuts" :key="shortcut.guid">
       <li>
-        <a :href=shortcut.getURL()>
+        <a :href="shortcut.getURL()">
           {{ shortcut.name }}
         </a>
       </li>
-
     </ul>
   </div>
 </template>
@@ -51,7 +52,7 @@ body {
 }
 
 body {
-//background-color: rgb(36, 36, 36);
+  //background-color: rgb(36, 36, 36);
 }
 
 body > div {

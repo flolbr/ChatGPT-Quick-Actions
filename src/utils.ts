@@ -1,4 +1,4 @@
-import browser from "webextension-polyfill";
+import browser from 'webextension-polyfill';
 
 // export function getCurrentTabUrl() {
 //   // Query the current active tab
@@ -23,8 +23,8 @@ import browser from "webextension-polyfill";
 // }
 
 export async function getCurrentTabUrl(): Promise<string> {
-  let tabs = await browser.tabs.query({active: true, currentWindow: true});
-  let currentTab = tabs[0];
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
 
   if (currentTab) {
     return currentTab.url as string;
@@ -32,4 +32,3 @@ export async function getCurrentTabUrl(): Promise<string> {
     throw new Error('No active tab found');
   }
 }
-
