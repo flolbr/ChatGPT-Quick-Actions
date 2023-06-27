@@ -54,5 +54,8 @@
       "48": "icons/border-48.png"
     },
     "default_title": "My Extension"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }

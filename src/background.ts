@@ -18,6 +18,7 @@ if (browser.runtime.id.endsWith('@temporary-addon')) {
   // Open the options page
   // browser.runtime.openOptionsPage().then(() => console.log('openOptionsPage'));
   // browser.tabs.create({url: browser.runtime.getURL('src/popup.html')});
+  // browser.tabs.create({ url: 'https://www.youtube.com/watch?v=YRBIoCIIxTE' });
   // browser.tabs.create({
   //   url: browser.runtime.getURL(
   // eslint-disable-next-line max-len
@@ -31,7 +32,7 @@ browser.contextMenus.create(
   {
     id: 'my-extension-link-action',
     title: 'Summarize using ChatGPT',
-    contexts: ['link'], // ContextType
+    contexts: ['link', "image", "page"], // ContextType
   },
   () => {
     if (browser.runtime.lastError) {

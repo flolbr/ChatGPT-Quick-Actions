@@ -1,4 +1,6 @@
-import Popup from './pages/PopUp.vue';
+import PopUp from './pages/PopUp.vue';
 import { createApp } from 'vue';
 
-createApp(Popup).mount('#test');
+createApp(PopUp).mount('#test');
+
+console.log('Hello from the popup.ts file!');

@@ -19,7 +19,7 @@ export default defineConfig({
     vue(),
     webExtension({
       manifest: generateManifest,
-      watchFilePaths: ["package.json", "manifest.json", ".webextrc.json", "*.vue"],
+      watchFilePaths: ["package.json", "manifest.json", ".webextrc.yaml", "dist/**/*"],
       browser: "firefox",
       // webExtConfig: {
       //   startUrl: [
@@ -28,4 +28,10 @@ export default defineConfig({
       // }
     }),
   ],
+  server: {
+    watch: {
+      // usePolling: true,
+    },
+    hmr: false,
+  }
 });

@@ -52,7 +52,8 @@ body {
 }
 
 body {
-  //background-color: rgb(36, 36, 36);
+  background-color: rgb(36, 36, 36);
+  color: white;
 }
 
 body > div {
